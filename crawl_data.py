@@ -25,9 +25,7 @@ def crawl_page(url, data_type):
     driver.get(find_more())
 
 
-
     while find_more():
-        
         driver.get(find_more())
         cards = driver.find_elements_by_css_selector('.list-item-card')
         
@@ -50,19 +48,34 @@ def crawl_page(url, data_type):
     for index, data in enumerate(tqdm(link_data)):
         driver.get(data['link'])
         try:
+            header = driver.find_element_by_css_selector('.article-hero-title>h1.heading')
+            link_data[index]['title'] = header.text
+        except Exception as e:
+            continue
+        try:
             body = driver.find_element_by_css_selector('.article-body')
             paragraphs = body.find_elements_by_css_selector('.article-pharagraph')[1:]
             text = ''
+
             for paragraph in paragraphs:
                 text += paragraph.text + '\n'
+            
+            if len(text) == 0:
+                paragraphs = driver.find_elements_by_css_selector('.classic-body p')
+                for paragraph in paragraphs:
+                    text += paragraph.text + '\n'
             link_data[index]['text'] = text
-        except Exception:
+        except Exception as e:
             continue
 
     driver.quit()
-
-    with open('bitcoin_article_data_{}.json'.format(data_type), 'w') as f:
-        json.dump(link_data, f, indent=4)
+    final_data = []
+    for link in link_data:
+        if 'text' in link.keys():
+            if len(link['text']) > 0:
+                final_data.append(link)
+    with open('./data/coindesk_data/bitcoin_article_data_{}.json'.format(data_type), 'w') as f:
+        json.dump(final_data, f, indent=4)
 
 if __name__ == "__main__":
     urls = [

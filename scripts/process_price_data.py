@@ -1,6 +1,6 @@
 import json
 
-data_path = './data/bitcoin_data/prices.json'
+data_path = '../data/bitcoin_data/prices.json'
 
 with open(data_path) as f:
     data = json.load(f)
@@ -21,5 +21,5 @@ for currency in data:
     new_data.append(currency_obj)
 
 
-with open('./data/final_data/prices.json', 'w') as f:
+with open('../data/final_data/prices.json', 'w') as f:
     json.dump(new_data, f, indent=4)

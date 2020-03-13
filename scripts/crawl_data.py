@@ -7,7 +7,7 @@ from tqdm import tqdm
 def create_driver():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome('./chromedriver', options=chrome_options)
+    driver = webdriver.Chrome('../chromedriver', options=chrome_options)
     return driver
 
 def crawl_page(url, data_type):
@@ -74,7 +74,7 @@ def crawl_page(url, data_type):
         if 'text' in link.keys():
             if len(link['text']) > 0:
                 final_data.append(link)
-    with open('./data/coindesk_data/bitcoin_article_data_{}.json'.format(data_type), 'w') as f:
+    with open('../data/coindesk_data/bitcoin_article_data_{}.json'.format(data_type), 'w') as f:
         json.dump(final_data, f, indent=4)
 
 if __name__ == "__main__":

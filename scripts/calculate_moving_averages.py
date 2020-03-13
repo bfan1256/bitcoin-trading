@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-with open('./data/bitcoin_data/bitcoin_price_data.json') as f:
+with open('../data/bitcoin_data/bitcoin_price_data.json') as f:
     data = json.load(f)
 
 

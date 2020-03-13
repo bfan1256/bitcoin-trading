@@ -2,7 +2,7 @@ import json
 from glob import glob
 from datetime import datetime
 
-path = './data/coindesk_data'
+path = '../data/coindesk_data'
 
 data_files = glob(path + '/*.json')
 

@@ -2,7 +2,7 @@ import json
 import uuid
 from glob import glob
 
-data_path = './data/coindesk_data/*.json'
+data_path = '../data/coindesk_data/*.json'
 
 data_files = glob(data_path)
 
@@ -24,5 +24,5 @@ for article in articles:
 
 print('Total # of Filtered Articles: {} Articles'.format(len(filtered_articles)))
 
-with open('./data/final_data/all_news.json', 'w') as f:
+with open('../data/final_data/all_news.json', 'w') as f:
     json.dump(filtered_articles, f, indent=4)

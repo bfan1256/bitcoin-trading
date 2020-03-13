@@ -21,4 +21,4 @@ for price in price_data:
     final_data.append(price)
 
 with open('../data/final_data/dataset.json', 'w') as f:
-    news_data = json.dump(final_data, f, indent=4)
+    json.dump(final_data, f, indent=4)

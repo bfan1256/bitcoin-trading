@@ -25,10 +25,10 @@ for file in tqdm(file_paths):
         article = articles[article_id]
         article['title'] = title_data[1]
         point_index = article['data-point']
-        new_article =  {i:article[i] for i in article if i!='data-point'}
+        new_article =  {i:article[i] for i in article if i!='data-point' and i!='text'}
         data[point_index]['news'].append(new_article)
 
         
-    with open('../data/final_data/dataset_augmented_{}.json'.format(augmented_amount), 'w') as f:
+    with open('../data/final_data/only_title_data/dataset_augmented_{}_only_titles.json'.format(augmented_amount), 'w') as f:
         json.dump(data, f, indent=4)
     f.close()
